@@ -1,12 +1,13 @@
 = Crazy data-oriented programming
 
-Big UP to https://github.com/bobocode-projects/java-fundamentals-exercises[bobocode-projects] and their marvelous exercises.
+Big UP to https://github.com/bobocode-projects/java-fundamentals-exercises[bobocode-projects] and their marvelous exercises. This is a missing part.
 
-This is a missing part.
 
-== Sealed interface
+== Cheat sheet
 
-=== Declaring a sealed interface
+=== Sealed interface
+
+==== Declaring a sealed interface
 
 [source,java]
 ----
@@ -15,7 +16,7 @@ public sealed interface Foo permits Fighters, Bar {
 }
 ----
 
-=== Implementing a sealed interface
+==== Implementing a sealed interface
 
 Can be done with either a `final` class, a sealed
 
@@ -44,7 +45,7 @@ public non-sealed interface Bar extends Foo {
 
 
 
-== Declaring a record
+=== Declaring a record
 
 [source,java]
 ----
@@ -53,7 +54,7 @@ public record FooFighter(String name, Instrument instrument, String yearsActive)
 }
 ----
 
-=== Compact constructor
+==== Compact constructor
 
 [source,java]
 ----
@@ -69,9 +70,9 @@ public record FooFighter(String name, Instrument instrument, String yearsActive)
 }
 ----
 
-=== Beware of mutable properties
+==== Beware of mutable properties
 
-== Switch expression (opposed to Switch statement)
+=== Switch expression (opposed to Switch statement)
 
 [source,java]
 ----
@@ -88,9 +89,9 @@ return switch day {
 }
 ----
 
-== Pattern matching
+=== Pattern matching
 
-=== In a if
+==== In a if
 
 [source,java]
 ----
@@ -100,7 +101,7 @@ if (value instanceof Person person) {
 ----
 
 
-=== in a switch
+==== in a switch
 
 [source,java]
 ----
@@ -129,6 +130,5 @@ return switch (value) {
     case Fighter fighter when fighter.name().startsWith("Dave") -> "Grohl !!!!!";
 }
 ----
-
 
 

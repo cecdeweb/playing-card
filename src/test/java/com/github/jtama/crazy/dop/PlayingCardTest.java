@@ -13,27 +13,27 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class PlayingCardTest {
 
 
-    @ParameterizedTest
-    @MethodSource("numberSuitInputs")
-    void testNumberSuitCardConstructorValidatesInputs(Color color, Integer index, String messagePart) {
-        assertThatThrownBy(() -> new NumberSuitCard(color, index))
-                .isInstanceOfAny(IllegalArgumentException.class, NullPointerException.class)
-                .hasMessageContaining(messagePart);
-    }
-
-    @ParameterizedTest
-    @MethodSource("royalSuitInputs")
-    void testRoyalSuitCardConstructorValidatesInputs(Color color, Face face, String messagePart) {
-        assertThatThrownBy(() -> new RoyalSuitCard(color, face))
-                .isInstanceOfAny(IllegalArgumentException.class, NullPointerException.class)
-                .hasMessageContaining(messagePart);
-    }
-
-    @ParameterizedTest(name = "Validate for {0}")
-    @MethodSource("cardProvider")
-    void testCardDisplay(PlayingCard card, String expected) {
-        assertThat(PrettyPrinter.toString(card)).isEqualTo(expected);
-    }
+//    @ParameterizedTest
+//    @MethodSource("numberSuitInputs")
+//    void testNumberSuitCardConstructorValidatesInputs(Color color, Integer index, String messagePart) {
+//        assertThatThrownBy(() -> new NumberSuitCard(color, index))
+//                .isInstanceOfAny(IllegalArgumentException.class, NullPointerException.class)
+//                .hasMessageContaining(messagePart);
+//    }
+//
+//    @ParameterizedTest
+//    @MethodSource("royalSuitInputs")
+//    void testRoyalSuitCardConstructorValidatesInputs(Color color, Face face, String messagePart) {
+//        assertThatThrownBy(() -> new RoyalSuitCard(color, face))
+//                .isInstanceOfAny(IllegalArgumentException.class, NullPointerException.class)
+//                .hasMessageContaining(messagePart);
+//    }
+//
+//    @ParameterizedTest(name = "Validate for {0}")
+//    @MethodSource("cardProvider")
+//    void testCardDisplay(PlayingCard card, String expected) {
+//        assertThat(PrettyPrinter.toString(card)).isEqualTo(expected);
+//    }
 
     static Stream<Arguments> numberSuitInputs() {
         return Stream.of(
@@ -54,26 +54,26 @@ class PlayingCardTest {
 
     }
 
-
-    static Stream<Arguments> cardProvider() {
-        return Stream.of(
-                arguments(new NumberSuitCard(Color.CLUBS, 1), "The first of clubs(♣) is very weak"),
-                arguments(new NumberSuitCard(Color.SPADES, 2), "The second of spades(♠) is very weak"),
-                arguments(new NumberSuitCard(Color.DIAMONDS, 3), "The third of diamonds(♦) is very weak"),
-                arguments(new NumberSuitCard(Color.HEARTS, 5), "The 5th of hearts(♥) is still weak"),
-                arguments(new NumberSuitCard(Color.DIAMONDS, 7), "The 7th of diamonds(♦) may win you a hand"),
-                arguments(new RoyalSuitCard(Color.SPADES, Face.JACK), "The Jack of spades(♠) is strong"),
-                arguments(new TrumpCard(21), "The trump n°21 is strong")
-        );
-
-    }
+//
+//    static Stream<Arguments> cardProvider() {
+//        return Stream.of(
+//                arguments(new NumberSuitCard(Color.CLUBS, 1), "The first of clubs(♣) is very weak"),
+//                arguments(new NumberSuitCard(Color.SPADES, 2), "The second of spades(♠) is very weak"),
+//                arguments(new NumberSuitCard(Color.DIAMONDS, 3), "The third of diamonds(♦) is very weak"),
+//                arguments(new NumberSuitCard(Color.HEARTS, 5), "The 5th of hearts(♥) is still weak"),
+//                arguments(new NumberSuitCard(Color.DIAMONDS, 7), "The 7th of diamonds(♦) may win you a hand"),
+//                arguments(new RoyalSuitCard(Color.SPADES, Face.JACK), "The Jack of spades(♠) is strong"),
+//                arguments(new TrumpCard(21), "The trump n°21 is strong")
+//        );
+//
+//    }
 
 
     private String FULL_DECK = """
-            The fist of spades is very weak,
-            The fist of hearts is very weak,
-            The fist of clubs is very weak,
-            The fist of diamonds is very weak,
+            The first of spades is very weak,
+            The first of hearts is very weak,
+            The first of clubs is very weak,
+            The first of diamonds is very weak,
             The second of spades is very weak,
             The second of hearts is very weak,
             The second of clubs is very weak,

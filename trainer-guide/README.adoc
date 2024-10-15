@@ -1,0 +1,50 @@
+:sectnums:
+
+= Trainer guide 
+
+== Make `TrumpCard` a record
+* Implicit `index`
+* Implicit `equals` & `hashcode`
+* Implicit constructor
+
+[WARNING]
+--
+No compact constructor at this point
+--
+
+== Add `RoyalSuitCard` and `NumberSuitCard` as records inheriting from `SuitCard` 
+
+[WARNING]
+--
+No compact constructor at this point
+--
+
+== Constrain `TrumpCard`, `RoyalPlayingCard` and `NumberPlayingCard` :
+* Constraints :
+** `NumberPlayingCard` has no `Face`
+** `RoyalPlayingCard` 's index is correlated to its `Face`
+** `RoyalPlayingCard` 's `Color` and `Face` cannot be `null` (compact constructor)
+** `NumberPlayingCard` 's `Color` and `Index` cannot be `null` and the `Index` must be between 1 and 10 (included)
+** `TrumpCard` 's `Index` must be between 0 and 21 (included)
+
+== Add a `Joker` class inheriting from `PlayingCard`
+
+* Display it using `PrettyPrinter` and observe the potential issue. 
+* Start solving it: 
+** Constrain `PlayingCard` to be either a `SuitCard` or a `TrumpCard` using a sealed interface (`Joker` may be removed at this point)
+** Make `SuitCard` a sealed interface as well
+
+== Clean the `PrettyPrinter` (step by step) :
+. Use pattern matching in the `instanceof` expression 
+. Use `formatted` to concatenate `String`
+. Transform the `toString(PlayingCard playingCard)` method into a unique `switch` on `playingCard`, without destructuration (example: write `case TrumpCard p ->`)
+. Add destructuration to the switch (example: write `case TrumpCard(Integer idx) ->`)
+
+[WARNING]
+--
+No more `default` case is needed in the end because the switch won't compile if all cases aren't covered
+--
+
+== Uncomment tests
+
+They shall pass \o/
