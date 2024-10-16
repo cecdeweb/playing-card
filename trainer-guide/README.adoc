@@ -1,8 +1,19 @@
 :sectnums:
 
-= Trainer guide 
+= Trainer guide
 
-== Make `TrumpCard` a record
+The goal of this workshop is to introduce the new features of Java from version 14 to 22.
+
+More specifically we will focus on _data oriented programming_, that is to say the use of records, sealed interfaces, pattern matching and other type related features.
+
+*We want to ask more of Java type system.*
+
+== Step 1: Introducing records
+
+=== Make `TrumpCard` a `record`
+
+Underline the following features:
+
 * Implicit `index`
 * Implicit `equals` & `hashcode`
 * Implicit constructor
@@ -12,14 +23,16 @@
 No compact constructor at this point
 --
 
-== Add `RoyalSuitCard` and `NumberSuitCard` as records inheriting from `SuitCard` 
+=== Add `RoyalSuitCard` and `NumberSuitCard` as records inheriting from `SuitCard`
+
+Again asking more from the type system: a suit card with en index lower than 10 should not have a face, and vice versa. This should NOT be a control in a constructor, this should be ensured by the compiler
 
 [WARNING]
 --
 No compact constructor at this point
 --
 
-== Constrain `TrumpCard`, `RoyalPlayingCard` and `NumberPlayingCard` :
+=== Constrain `TrumpCard`, `RoyalPlayingCard` and `NumberPlayingCard` :
 * Constraints :
 ** `NumberPlayingCard` has no `Face`
 ** `RoyalPlayingCard` 's index is correlated to its `Face`
@@ -27,18 +40,33 @@ No compact constructor at this point
 ** `NumberPlayingCard` 's `Color` and `Index` cannot be `null` and the `Index` must be between 1 and 10 (included)
 ** `TrumpCard` 's `Index` must be between 0 and 21 (included)
 
-== Add a `Joker` class inheriting from `PlayingCard`
+=== Showing the limitation of open heritage
 
-* Display it using `PrettyPrinter` and observe the potential issue. 
-* Start solving it: 
-** Constrain `PlayingCard` to be either a `SuitCard` or a `TrumpCard` using a sealed interface (`Joker` may be removed at this point)
-** Make `SuitCard` a sealed interface as well
+Ask for a `Joker` class inheriting from `PlayingCard`
 
-== Clean the `PrettyPrinter` (step by step) :
-. Use pattern matching in the `instanceof` expression 
-. Use `formatted` to concatenate `String`
-. Transform the `toString(PlayingCard playingCard)` method into a unique `switch` on `playingCard`, without destructuration (example: write `case TrumpCard p ->`)
-. Add destructuration to the switch (example: write `case TrumpCard(Integer idx) ->`)
+Display it using `PrettyPrinter` and observe the potential issue.
+
+== Step 2: Introducing sealed interfaces
+
+Start solving the *Joker case*:
+
+* Explain the sealed interface hierarchie represent a close world, or at least explicit their extension points.
+* Constrain `PlayingCard` to be either a `SuitCard` or a `TrumpCard` using a sealed interface (`Joker` may be removed at this point)
+* Make `SuitCard` a sealed interface as well
+
+== Step 3: Introducing pattern matching
+
+All this part takes place in the `PrettyPrinter` class.
+
+Clean the `PrettyPrinter` (step by step) :
+
+* Use pattern matching in the `instanceof` expression +
+Don't forget to point that `"".formated()` is a thing now.
+* Mutate the switch to a statement, ie `var result = switch(playingCard) { ... }`
+* Introduce switch on types. +
+The `toString` method is now a giant switch.
+* Introduce guarded case patterns, ie `case NumberPlayingCard card when card.index() == 1 ->`
+* Add destructuration to the switch,ie `case TrumpCard(Integer idx) ->`)
 
 [WARNING]
 --
