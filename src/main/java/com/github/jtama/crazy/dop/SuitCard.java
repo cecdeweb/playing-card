@@ -8,6 +8,18 @@ public class SuitCard implements PlayingCard {
     private final Face face;
 
     public SuitCard(Color color, Integer index, Face face) {
+        if (color == null)
+            throw new IllegalArgumentException("Color must not be null.");
+        if (index == null)
+            throw new IllegalArgumentException("Color must not be null.");
+        if (index < 1)
+            throw new IndexOutOfBoundsException("Index must be positive.");
+        if (index > 15)
+            throw new IndexOutOfBoundsException("Index must be lesser than 15.");
+        if (index > 10 && face == null)
+            throw new IllegalArgumentException("Face must not be null for index greater than 10.");
+        if (index < 11 && face != null)
+            throw new IllegalArgumentException("Face must be null for index lesser than 11.");
         this.color = color;
         this.index = index;
         this.face = face;
@@ -37,5 +49,14 @@ public class SuitCard implements PlayingCard {
     @Override
     public int hashCode() {
         return Objects.hash(color, index, face);
+    }
+
+    @Override
+    public String toString() {
+        return "SuitCard{" +
+                "color=" + color +
+                ", index=" + index +
+                ", face=" + face +
+                '}';
     }
 }

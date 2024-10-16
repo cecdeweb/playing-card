@@ -29,4 +29,11 @@ public class TrumpCard implements PlayingCard {
     public int hashCode() {
         return Objects.hashCode(index);
     }
+
+    @Override
+    public String toString() {
+        return "TrumpCard{" +
+                "index=" + index +
+                '}';
+    }
 }
