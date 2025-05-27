@@ -13,7 +13,7 @@ public class TrumpCard implements PlayingCard {
     
 
     @Override
-    public Integer index() {
+    public int index() {
         return this.index;
     }
 
